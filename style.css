@@ -1,0 +1,477 @@
+/* ==========================================
+   QUIZZONE 💗🩶
+   PINK + GRAY DESIGN
+========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #f5f5f5;
+    background:
+        radial-gradient(
+            circle at top,
+            #5a3f4d 0%,
+            #343434 35%,
+            #202020 70%,
+            #181818 100%
+        );
+    overflow-x: hidden;
+}
+/* ==========================================
+   HEADER
+========================================== */
+.header {
+    text-align: center;
+    padding: 40px 20px 25px;
+}
+.header h1 {
+    color: #ff8fbd;
+    font-size: 38px;
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 7px rgba(255, 143, 189, 0.55),
+        0 0 18px rgba(255, 143, 189, 0.2);
+}
+.header p {
+    margin-top: 10px;
+    color: #d8d8d8;
+    font-size: 16px;
+}
+/* ==========================================
+   HIDDEN
+========================================== */
+.hidden {
+    display: none !important;
+}
+/* ==========================================
+   HOME
+========================================== */
+#home {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.home-card {
+    width: 92%;
+    max-width: 480px;
+    padding: 30px 22px;
+    background: #292929;
+    border:
+        1px solid rgba(255, 143, 189, 0.55);
+    border-radius: 25px;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.35),
+        0 0 14px rgba(255, 143, 189, 0.12);
+    text-align: center;
+}
+.home-card h2 {
+    margin-bottom: 25px;
+    color: #ff9bc4;
+    font-size: 24px;
+    text-shadow:
+        0 0 7px rgba(255, 143, 189, 0.3);
+}
+/* ==========================================
+   HOME BUTTONS
+========================================== */
+.home-card button {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 15px;
+    border: none;
+    border-radius: 17px;
+    background: #e978aa;
+    color: #242424;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(255, 143, 189, 0.2);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+.home-card button:hover {
+    background: #f28ab7;
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.35),
+        0 0 13px rgba(255, 143, 189, 0.4);
+}
+.home-card button:active {
+    transform: scale(0.97);
+}
+/* ==========================================
+   QUIZ AREA
+========================================== */
+#quiz {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.quiz-card {
+    width: 92%;
+    max-width: 550px;
+    padding: 25px;
+    background: #292929;
+    border:
+        1px solid rgba(255, 143, 189, 0.6);
+    border-radius: 25px;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 15px rgba(255, 143, 189, 0.12);
+}
+/* ==========================================
+   QUIZ TOP
+========================================== */
+.quiz-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.back-btn {
+    padding: 8px 14px;
+    border-radius: 13px;
+    border:
+        1px solid #d878a5;
+    background: #3a3a3a;
+    color: #ffb2d0;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.back-btn:hover {
+    background: #d878a5;
+    color: #252525;
+}
+.question-number {
+    color: #dedede;
+    font-weight: bold;
+}
+/* ==========================================
+   PROGRESS BAR
+========================================== */
+.progress-container {
+    width: 100%;
+    height: 9px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #444;
+}
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
+    background: #e978aa;
+    box-shadow:
+        0 0 8px rgba(255, 143, 189, 0.45);
+    transition:
+        width 0.35s ease;
+}
+/* ==========================================
+   SCORE
+========================================== */
+.score {
+    text-align: right;
+    margin-bottom: 20px;
+    color: #d5d5d5;
+    font-size: 15px;
+    font-weight: bold;
+}
+#score {
+    display: inline-block;
+    min-width: 20px;
+    color: #ff91bd;
+    font-size: 21px;
+    text-shadow:
+        0 0 7px rgba(255, 143, 189, 0.5);
+}
+/* ==========================================
+   QUESTION
+========================================== */
+.question-box {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 18px;
+    background: #333333;
+    border:
+        1px solid rgba(255, 143, 189, 0.25);
+}
+.question-box h2 {
+    color: #f5f5f5;
+    font-size: 21px;
+    line-height: 1.4;
+}
+/* ==========================================
+   ANSWERS
+========================================== */
+.answers button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 14px;
+    border-radius: 15px;
+    border:
+        1px solid #555;
+    background: #3a3a3a;
+    color: #f1f1f1;
+    font-size: 15px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+.answers button:hover {
+    background: #444;
+    border-color: #df82ac;
+    box-shadow:
+        0 0 9px rgba(255, 143, 189, 0.25);
+    transform: translateY(-1px);
+}
+.answers button:active {
+    transform: scale(0.98);
+}
+/* ==========================================
+   CORRECT
+========================================== */
+.answers button.correct {
+    background: #e978aa;
+    color: #252525;
+    border-color: #ffafd0;
+    box-shadow:
+        0 0 13px rgba(255, 143, 189, 0.45);
+}
+/* ==========================================
+   WRONG
+========================================== */
+.answers button.wrong {
+    background: #5a3948;
+    color: #ffd4e5;
+    border-color: #c96b95;
+    box-shadow:
+        0 0 8px rgba(201, 107, 149, 0.25);
+}
+/* ==========================================
+   NEXT BUTTON
+========================================== */
+.next-btn {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    padding: 14px;
+    border: none;
+    border-radius: 17px;
+    background: #e978aa;
+    color: #252525;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.3);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+.next-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 13px rgba(255, 143, 189, 0.4);
+}
+.next-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+/* ==========================================
+   RESULT
+========================================== */
+#result {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.result-card {
+    width: 92%;
+    max-width: 450px;
+    padding: 35px 25px;
+    text-align: center;
+    background: #292929;
+    border:
+        1px solid #e978aa;
+    border-radius: 25px;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 15px rgba(255, 143, 189, 0.2);
+}
+.result-card h2 {
+    color: #ff9bc4;
+    margin-bottom: 20px;
+}
+.result-score {
+    color: #ff8fbd;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow:
+        0 0 9px rgba(255, 143, 189, 0.5);
+}
+.result-card p {
+    margin-bottom: 25px;
+    color: #d9d9d9;
+    font-size: 17px;
+}
+/* ==========================================
+   RESULT BUTTONS
+========================================== */
+.result-card button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 13px;
+    border: none;
+    border-radius: 16px;
+    background: #e978aa;
+    color: #252525;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.result-card button:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 0 12px rgba(255, 143, 189, 0.4);
+}
+/* ==========================================
+   POPUP
+========================================== */
+.popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background:
+        rgba(20, 20, 20, 0.75);
+}
+.popup-box {
+    width: 90%;
+    max-width: 380px;
+    padding: 35px 25px;
+    text-align: center;
+    background: #303030;
+    border:
+        2px solid #e978aa;
+    border-radius: 25px;
+    box-shadow:
+        0 0 18px rgba(255, 143, 189, 0.45);
+    animation:
+        popupIn 0.3s ease;
+}
+@keyframes popupIn {
+    from {
+        transform: scale(0.75);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.popup-box h2 {
+    color: #ff91bd;
+    margin-bottom: 12px;
+    text-shadow:
+        0 0 8px rgba(255, 143, 189, 0.5);
+}
+.popup-box p {
+    color: #dddddd;
+    margin-bottom: 22px;
+}
+/* ==========================================
+   PINK BOOM
+========================================== */
+.boom {
+    font-size: 55px;
+    margin-bottom: 10px;
+    animation:
+        boom 0.6s ease;
+}
+@keyframes boom {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.35);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* ==========================================
+   POPUP BUTTON
+========================================== */
+.popup-box button {
+    padding: 13px 30px;
+    border: none;
+    border-radius: 18px;
+    background: #e978aa;
+    color: #252525;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow:
+        0 0 9px rgba(255, 143, 189, 0.35);
+}
+.popup-box button:hover {
+    transform: scale(1.04);
+    box-shadow:
+        0 0 14px rgba(255, 143, 189, 0.55);
+}
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 500px) {
+    .header {
+        padding-top: 30px;
+    }
+    .header h1 {
+        font-size: 30px;
+    }
+    .home-card,
+    .quiz-card,
+    .result-card {
+        width: 95%;
+    }
+    .quiz-top {
+        align-items: flex-start;
+    }
+    .question-number {
+        font-size: 13px;
+    }
+    .question-box h2 {
+        font-size: 18px;
+    }
+    .answers button {
+        font-size: 14px;
+        padding: 13px 10px;
+    }
+}
