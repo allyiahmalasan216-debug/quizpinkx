@@ -1,477 +1,665 @@
-/* ==========================================
-   QUIZZONE 💗🩶
-   PINK + GRAY DESIGN
-========================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #f5f5f5;
-    background:
-        radial-gradient(
-            circle at top,
-            #5a3f4d 0%,
-            #343434 35%,
-            #202020 70%,
-            #181818 100%
-        );
-    overflow-x: hidden;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: #f7b7d2;
+    touch-action: none;
 }
-/* ==========================================
-   HEADER
-========================================== */
-.header {
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(#ffddea, #f6b2d1);
+}
+
+#hud {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 200;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#hud div {
+    background: rgba(255,255,255,.9);
+    padding: 9px 15px;
+    border-radius: 25px;
+}
+
+#message {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 300;
     text-align: center;
-    padding: 40px 20px 25px;
-}
-.header h1 {
-    color: #ff8fbd;
+    color: white;
     font-size: 38px;
-    letter-spacing: 2px;
-    text-shadow:
-        0 0 7px rgba(255, 143, 189, 0.55),
-        0 0 18px rgba(255, 143, 189, 0.2);
+    font-weight: bold;
+    text-shadow: 3px 3px 0 #d95d91;
 }
-.header p {
-    margin-top: 10px;
-    color: #d8d8d8;
-    font-size: 16px;
+
+#world {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10000px;
+    height: 100%;
 }
-/* ==========================================
-   HIDDEN
-========================================== */
+
+/* =========================
+   SMALL CHARACTER
+========================= */
+
+#player {
+    position: absolute;
+    width: 42px;
+    height: 75px;
+    z-index: 100;
+    transform-origin: bottom center;
+}
+
+/* SHORT HAIR */
+
+.back-hair {
+    position: absolute;
+    width: 31px;
+    height: 34px;
+    left: 5px;
+    top: 5px;
+    background: #704052;
+    border-radius: 50% 50% 40% 40%;
+    z-index: 1;
+}
+
+.front-hair {
+    position: absolute;
+    width: 30px;
+    height: 14px;
+    left: 1px;
+    top: -2px;
+    background: #704052;
+    border-radius: 50% 50% 35% 35%;
+    z-index: 10;
+}
+
+.front-hair::before,
+.front-hair::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 15px;
+    top: 6px;
+    background: #704052;
+    border-radius: 0 0 50% 50%;
+}
+
+.front-hair::before {
+    left: 0;
+}
+
+.front-hair::after {
+    right: 0;
+}
+
+/* FACE */
+
+.head {
+    position: absolute;
+    width: 30px;
+    height: 32px;
+    left: 6px;
+    top: 6px;
+    background: #ffd0b5;
+    border: 1px solid #d99378;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+/* EYES */
+
+.eye {
+    position: absolute;
+    width: 4px;
+    height: 6px;
+    top: 14px;
+    background: #3d2730;
+    border-radius: 50%;
+    z-index: 15;
+}
+
+.eye-left {
+    left: 6px;
+}
+
+.eye-right {
+    right: 6px;
+}
+
+.eye::after {
+    content: "";
+    position: absolute;
+    width: 1.5px;
+    height: 1.5px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+}
+
+/* BLUSH */
+
+.blush {
+    position: absolute;
+    width: 5px;
+    height: 3px;
+    background: #f28ab7;
+    border-radius: 50%;
+    top: 22px;
+    z-index: 15;
+}
+
+.blush-left {
+    left: 2px;
+}
+
+.blush-right {
+    right: 2px;
+}
+
+/* NOSE */
+
+.nose {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #d99178;
+    border-radius: 50%;
+    top: 22px;
+    left: 14px;
+}
+
+/* SMILE */
+
+.mouth {
+    position: absolute;
+    width: 7px;
+    height: 4px;
+    border-bottom: 1.5px solid #c55c75;
+    border-radius: 0 0 50% 50%;
+    left: 11px;
+    top: 25px;
+}
+
+/* BODY */
+
+.neck {
+    position: absolute;
+    width: 7px;
+    height: 6px;
+    background: #ffd0b5;
+    left: 17px;
+    top: 36px;
+}
+
+.shirt {
+    position: absolute;
+    width: 24px;
+    height: 21px;
+    left: 9px;
+    top: 40px;
+    background: #ff72b1;
+    border-radius: 8px 8px 4px 4px;
+    z-index: 4;
+}
+
+.shirt::after {
+    content: "♥";
+    position: absolute;
+    color: white;
+    font-size: 7px;
+    left: 8px;
+    top: 4px;
+}
+
+/* ARMS */
+
+.arm {
+    position: absolute;
+    width: 5px;
+    height: 19px;
+    background: #ffd0b5;
+    border-radius: 8px;
+    top: 41px;
+    z-index: 2;
+}
+
+.arm-left {
+    left: 5px;
+}
+
+.arm-right {
+    right: 5px;
+}
+
+/* SKIRT */
+
+.skirt {
+    position: absolute;
+    left: 5px;
+    top: 58px;
+    width: 30px;
+    height: 17px;
+    background: #ff91c4;
+    clip-path: polygon(12% 0,88% 0,100% 100%,0 100%);
+    z-index: 5;
+}
+
+.skirt div {
+    display: none;
+}
+
+/* LEGS */
+
+.leg {
+    position: absolute;
+    width: 5px;
+    height: 15px;
+    background: #ffd0b5;
+    border-radius: 0 0 6px 6px;
+    top: 71px;
+    z-index: 3;
+}
+
+.leg-left {
+    left: 13px;
+}
+
+.leg-right {
+    left: 24px;
+}
+
+/* SHOES */
+
+.shoe {
+    position: absolute;
+    width: 10px;
+    height: 4px;
+    background: #8f4d72;
+    border-radius: 8px;
+    top: 84px;
+}
+
+.shoe-left {
+    left: 10px;
+}
+
+.shoe-right {
+    left: 23px;
+}
+
+/* =========================
+   RUNNING ANIMATION
+========================= */
+
+#player.running {
+    animation: bodyBounce .16s infinite alternate;
+}
+
+#player.running .leg-left {
+    animation: runLeg1 .16s infinite alternate;
+}
+
+#player.running .leg-right {
+    animation: runLeg2 .16s infinite alternate;
+}
+
+#player.running .arm-left {
+    animation: runArm1 .16s infinite alternate;
+}
+
+#player.running .arm-right {
+    animation: runArm2 .16s infinite alternate;
+}
+
+@keyframes bodyBounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes runLeg1 {
+    from {
+        transform: rotate(25deg);
+    }
+
+    to {
+        transform: rotate(-25deg);
+    }
+}
+
+@keyframes runLeg2 {
+    from {
+        transform: rotate(-25deg);
+    }
+
+    to {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes runArm1 {
+    from {
+        transform: rotate(-25deg);
+    }
+
+    to {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes runArm2 {
+    from {
+        transform: rotate(25deg);
+    }
+
+    to {
+        transform: rotate(-25deg);
+    }
+}
+
+/* =========================
+   ACTUAL FACING DIRECTION
+========================= */
+
+/* RIGHT = normal */
+
+#player:not(.facing-left) .head {
+    transform: translateX(3px);
+}
+
+#player:not(.facing-left) .front-hair {
+    transform: translateX(3px);
+}
+
+/* LEFT = flip entire CHARACTER */
+
+#player.facing-left .body {
+    transform: scaleX(-1);
+}
+
+#player.facing-left .back-hair {
+    transform: scaleX(-1);
+}
+
+/* =========================
+   JUMP
+========================= */
+
+#player.jumping .arm-left {
+    transform: rotate(-45deg);
+}
+
+#player.jumping .arm-right {
+    transform: rotate(45deg);
+}
+
+#player.jumping .leg-left {
+    transform: rotate(20deg);
+}
+
+#player.jumping .leg-right {
+    transform: rotate(-20deg);
+}
+
+/* PLATFORMS */
+
+.platform {
+    position: absolute;
+    height: 28px;
+    background: #666;
+    border-radius: 8px;
+    box-shadow: 0 5px 0 #444;
+}
+
+.platform::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -8px;
+    height: 8px;
+    background: #ff65aa;
+    border-radius: 8px 8px 0 0;
+}
+
+/* FRUITS */
+
+.fruit {
+    position: absolute;
+    font-size: 30px;
+    z-index: 50;
+    animation: fruitFloat .7s infinite alternate;
+}
+
+@keyframes fruitFloat {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+.finish {
+    position: absolute;
+    width: 60px;
+    height: 110px;
+    border-left: 7px solid #555;
+}
+
+.finish::after {
+    content: "🏁";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    font-size: 45px;
+}
+
+/* CONTROLS */
+
+#controls {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 200;
+}
+
+#controls button {
+    width: 68px;
+    height: 68px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,.92);
+    color: #ed5797;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 5px 12px rgba(0,0,0,.18);
+}
+/* =========================
+   GAME MENU
+========================= */
+
+#gameMenu {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 250;
+}
+
+#gameMenu button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,.95);
+    color: #ed5797;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 5px 12px rgba(0,0,0,.18);
+}
+
+
+/* =========================
+   MENUS
+========================= */
+
+.menuScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255, 182, 210, .88);
+    backdrop-filter: blur(6px);
+}
+
+.menuBox {
+    width: min(90%, 380px);
+    padding: 30px;
+
+    text-align: center;
+
+    background: white;
+    border: 5px solid #ff68ae;
+    border-radius: 30px;
+
+    box-shadow: 0 15px 40px rgba(134,50,82,.25);
+}
+
+.menuBox h1 {
+    color: #ec4d99;
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.menuBox button {
+    display: block;
+    width: 100%;
+
+    border: none;
+
+    background: linear-gradient(
+        #ff7dbc,
+        #ed4a99
+    );
+
+    color: white;
+
+    font-weight: bold;
+    font-size: 17px;
+
+    padding: 13px;
+    margin: 12px 0;
+
+    border-radius: 25px;
+
+    box-shadow: 0 5px #b93475;
+}
+
+.menuBox button:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px #b93475;
+}
+
 .hidden {
     display: none !important;
 }
-/* ==========================================
-   HOME
-========================================== */
-#home {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-.home-card {
-    width: 92%;
-    max-width: 480px;
-    padding: 30px 22px;
-    background: #292929;
-    border:
-        1px solid rgba(255, 143, 189, 0.55);
-    border-radius: 25px;
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.35),
-        0 0 14px rgba(255, 143, 189, 0.12);
-    text-align: center;
-}
-.home-card h2 {
-    margin-bottom: 25px;
-    color: #ff9bc4;
+#pauseBtn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+
+    width: 55px;
+    height: 55px;
+
+    border: 3px solid white;
+    border-radius: 50%;
+
+    background: #ed5797;
+    color: white;
+
     font-size: 24px;
-    text-shadow:
-        0 0 7px rgba(255, 143, 189, 0.3);
+    font-weight: bold;
 }
-/* ==========================================
-   HOME BUTTONS
-========================================== */
-.home-card button {
+
+.menuScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 182, 210, 0.9);
+}
+
+.menuBox {
+    background: white;
+    padding: 30px;
+    width: 85%;
+    max-width: 380px;
+    text-align: center;
+
+    border: 5px solid #ff68ae;
+    border-radius: 30px;
+}
+
+.menuBox h1 {
+    color: #ec4d99;
+}
+
+.menuBox button {
     display: block;
     width: 100%;
     margin: 12px 0;
-    padding: 15px;
-    border: none;
-    border-radius: 17px;
-    background: #e978aa;
-    color: #242424;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.3),
-        0 0 8px rgba(255, 143, 189, 0.2);
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-.home-card button:hover {
-    background: #f28ab7;
-    transform: translateY(-2px);
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.35),
-        0 0 13px rgba(255, 143, 189, 0.4);
-}
-.home-card button:active {
-    transform: scale(0.97);
-}
-/* ==========================================
-   QUIZ AREA
-========================================== */
-#quiz {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-.quiz-card {
-    width: 92%;
-    max-width: 550px;
-    padding: 25px;
-    background: #292929;
-    border:
-        1px solid rgba(255, 143, 189, 0.6);
-    border-radius: 25px;
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.4),
-        0 0 15px rgba(255, 143, 189, 0.12);
-}
-/* ==========================================
-   QUIZ TOP
-========================================== */
-.quiz-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-.back-btn {
-    padding: 8px 14px;
-    border-radius: 13px;
-    border:
-        1px solid #d878a5;
-    background: #3a3a3a;
-    color: #ffb2d0;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-.back-btn:hover {
-    background: #d878a5;
-    color: #252525;
-}
-.question-number {
-    color: #dedede;
-    font-weight: bold;
-}
-/* ==========================================
-   PROGRESS BAR
-========================================== */
-.progress-container {
-    width: 100%;
-    height: 9px;
-    margin-bottom: 18px;
-    overflow: hidden;
-    border-radius: 10px;
-    background: #444;
-}
-.progress-bar {
-    width: 0%;
-    height: 100%;
-    border-radius: 10px;
-    background: #e978aa;
-    box-shadow:
-        0 0 8px rgba(255, 143, 189, 0.45);
-    transition:
-        width 0.35s ease;
-}
-/* ==========================================
-   SCORE
-========================================== */
-.score {
-    text-align: right;
-    margin-bottom: 20px;
-    color: #d5d5d5;
-    font-size: 15px;
-    font-weight: bold;
-}
-#score {
-    display: inline-block;
-    min-width: 20px;
-    color: #ff91bd;
-    font-size: 21px;
-    text-shadow:
-        0 0 7px rgba(255, 143, 189, 0.5);
-}
-/* ==========================================
-   QUESTION
-========================================== */
-.question-box {
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 18px;
-    background: #333333;
-    border:
-        1px solid rgba(255, 143, 189, 0.25);
-}
-.question-box h2 {
-    color: #f5f5f5;
-    font-size: 21px;
-    line-height: 1.4;
-}
-/* ==========================================
-   ANSWERS
-========================================== */
-.answers button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
     padding: 14px;
-    border-radius: 15px;
-    border:
-        1px solid #555;
-    background: #3a3a3a;
-    color: #f1f1f1;
-    font-size: 15px;
-    cursor: pointer;
-    transition:
-        background 0.2s ease,
-        transform 0.15s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-.answers button:hover {
-    background: #444;
-    border-color: #df82ac;
-    box-shadow:
-        0 0 9px rgba(255, 143, 189, 0.25);
-    transform: translateY(-1px);
-}
-.answers button:active {
-    transform: scale(0.98);
-}
-/* ==========================================
-   CORRECT
-========================================== */
-.answers button.correct {
-    background: #e978aa;
-    color: #252525;
-    border-color: #ffafd0;
-    box-shadow:
-        0 0 13px rgba(255, 143, 189, 0.45);
-}
-/* ==========================================
-   WRONG
-========================================== */
-.answers button.wrong {
-    background: #5a3948;
-    color: #ffd4e5;
-    border-color: #c96b95;
-    box-shadow:
-        0 0 8px rgba(201, 107, 149, 0.25);
-}
-/* ==========================================
-   NEXT BUTTON
-========================================== */
-.next-btn {
-    display: block;
-    width: 100%;
-    margin-top: 18px;
-    padding: 14px;
+
     border: none;
-    border-radius: 17px;
-    background: #e978aa;
-    color: #252525;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.3);
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-.next-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow:
-        0 0 13px rgba(255, 143, 189, 0.4);
-}
-.next-btn:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
-/* ==========================================
-   RESULT
-========================================== */
-#result {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-.result-card {
-    width: 92%;
-    max-width: 450px;
-    padding: 35px 25px;
-    text-align: center;
-    background: #292929;
-    border:
-        1px solid #e978aa;
     border-radius: 25px;
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.4),
-        0 0 15px rgba(255, 143, 189, 0.2);
-}
-.result-card h2 {
-    color: #ff9bc4;
-    margin-bottom: 20px;
-}
-.result-score {
-    color: #ff8fbd;
-    font-size: 48px;
+
+    background: #ed5797;
+    color: white;
+
     font-weight: bold;
-    margin-bottom: 15px;
-    text-shadow:
-        0 0 9px rgba(255, 143, 189, 0.5);
-}
-.result-card p {
-    margin-bottom: 25px;
-    color: #d9d9d9;
     font-size: 17px;
 }
-/* ==========================================
-   RESULT BUTTONS
-========================================== */
-.result-card button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 13px;
-    border: none;
-    border-radius: 16px;
-    background: #e978aa;
-    color: #252525;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-.result-card button:hover {
-    transform: scale(1.02);
-    box-shadow:
-        0 0 12px rgba(255, 143, 189, 0.4);
-}
-/* ==========================================
-   POPUP
-========================================== */
-.popup {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background:
-        rgba(20, 20, 20, 0.75);
-}
-.popup-box {
-    width: 90%;
-    max-width: 380px;
-    padding: 35px 25px;
-    text-align: center;
-    background: #303030;
-    border:
-        2px solid #e978aa;
-    border-radius: 25px;
-    box-shadow:
-        0 0 18px rgba(255, 143, 189, 0.45);
-    animation:
-        popupIn 0.3s ease;
-}
-@keyframes popupIn {
-    from {
-        transform: scale(0.75);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-.popup-box h2 {
-    color: #ff91bd;
-    margin-bottom: 12px;
-    text-shadow:
-        0 0 8px rgba(255, 143, 189, 0.5);
-}
-.popup-box p {
-    color: #dddddd;
-    margin-bottom: 22px;
-}
-/* ==========================================
-   PINK BOOM
-========================================== */
-.boom {
-    font-size: 55px;
-    margin-bottom: 10px;
-    animation:
-        boom 0.6s ease;
-}
-@keyframes boom {
-    0% {
-        transform: scale(0.2);
-        opacity: 0;
-    }
-    50% {
-        transform: scale(1.35);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-/* ==========================================
-   POPUP BUTTON
-========================================== */
-.popup-box button {
-    padding: 13px 30px;
-    border: none;
-    border-radius: 18px;
-    background: #e978aa;
-    color: #252525;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow:
-        0 0 9px rgba(255, 143, 189, 0.35);
-}
-.popup-box button:hover {
-    transform: scale(1.04);
-    box-shadow:
-        0 0 14px rgba(255, 143, 189, 0.55);
-}
-/* ==========================================
-   MOBILE
-========================================== */
-@media (max-width: 500px) {
-    .header {
-        padding-top: 30px;
-    }
-    .header h1 {
-        font-size: 30px;
-    }
-    .home-card,
-    .quiz-card,
-    .result-card {
-        width: 95%;
-    }
-    .quiz-top {
-        align-items: flex-start;
-    }
-    .question-number {
-        font-size: 13px;
-    }
-    .question-box h2 {
-        font-size: 18px;
-    }
-    .answers button {
-        font-size: 14px;
-        padding: 13px 10px;
-    }
+
+.hidden {
+    display: none !important;
 }

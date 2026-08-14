@@ -1,172 +1,2319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-    <title>QuizPinkx 💗</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-    <title>QuizPinkx 💗</title>
+<title>🎀 Pink Adventure</title>
 
-    <link rel="icon" type="image/png" href="logo.png">
+<style>
 
-    <link rel="stylesheet" href="style.css">
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#ffd1e6;
+    font-family:Arial,sans-serif;
+    touch-action:none;
+}
+
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(
+        #ffc2df 0%,
+        #ffeaf5 65%,
+        #f5b6d7 100%
+    );
+}
+
+#world{
+    position:absolute;
+    left:0;
+    top:0;
+    width:7000px;
+    height:100%;
+}
+
+
+/* CLOUDS */
+
+.cloud{
+    position:absolute;
+    width:125px;
+    height:40px;
+    background:#fff;
+    border-radius:50px;
+    opacity:.75;
+}
+
+.cloud:before{
+    content:"";
+    position:absolute;
+    width:55px;
+    height:55px;
+    left:15px;
+    top:-27px;
+    background:#fff;
+    border-radius:50%;
+}
+
+.cloud:after{
+    content:"";
+    position:absolute;
+    width:62px;
+    height:62px;
+    right:12px;
+    top:-30px;
+    background:#fff;
+    border-radius:50%;
+}
+
+
+/* PLATFORMS */
+
+.platform{
+    position:absolute;
+    height:34px;
+
+    border:4px solid #fff;
+    border-radius:12px;
+
+    background:linear-gradient(
+        #ff9dcc,
+        #ed579d
+    );
+
+    box-shadow:0 7px 0 #c83d7b;
+}
+
+.platform:before{
+    content:"";
+    position:absolute;
+    left:12px;
+    right:12px;
+    top:5px;
+    height:5px;
+    background:#ffd8ea;
+    border-radius:10px;
+}
+
+
+/* PLAYER */
+
+#player{
+    position:absolute;
+
+    width:48px;
+    height:82px;
+
+    z-index:50;
+
+    --flip:1;
+
+    transform:scaleX(var(--flip));
+
+    transform-origin:center bottom;
+}
+
+#player.left{
+    --flip:-1;
+}
+
+
+/* HAIR */
+
+.hair{
+    position:absolute;
+
+    left:5px;
+    top:-1px;
+
+    width:39px;
+    height:39px;
+
+    background:#66314d;
+
+    border-radius:48% 55% 45% 50%;
+
+    z-index:1;
+
+    box-shadow:
+        -5px 5px 0 #66314d,
+        5px 3px 0 #66314d,
+        -3px 13px 0 #66314d;
+}
+
+.hair:before{
+    content:"";
+
+    position:absolute;
+
+    left:-5px;
+    top:13px;
+
+    width:13px;
+    height:19px;
+
+    background:#66314d;
+
+    border-radius:50%;
+
+    transform:rotate(-15deg);
+}
+
+.hair:after{
+    content:"";
+
+    position:absolute;
+
+    right:-5px;
+    top:12px;
+
+    width:13px;
+    height:20px;
+
+    background:#66314d;
+
+    border-radius:50%;
+
+    transform:rotate(15deg);
+}
+
+
+/* BRAID */
+
+.braid{
+    position:absolute;
+
+    left:-2px;
+    top:28px;
+
+    width:12px;
+    height:27px;
+
+    z-index:8;
+}
+
+.braid span{
+    position:absolute;
+
+    width:12px;
+    height:9px;
+
+    background:#713652;
+
+    border:2px solid #4d293d;
+
+    border-radius:50%;
+}
+
+.braid span:nth-child(1){
+    left:1px;
+    top:0;
+    transform:rotate(-8deg);
+}
+
+.braid span:nth-child(2){
+    left:-1px;
+    top:5px;
+    transform:rotate(8deg);
+}
+
+.braid span:nth-child(3){
+    left:1px;
+    top:10px;
+    transform:rotate(-8deg);
+}
+
+.braid span:nth-child(4){
+    left:-1px;
+    top:15px;
+    transform:rotate(8deg);
+}
+
+.braid span:nth-child(5){
+    left:1px;
+    top:20px;
+    transform:rotate(-8deg);
+}
+
+.braid:after{
+    content:"🎀";
+
+    position:absolute;
+
+    left:-4px;
+    top:20px;
+
+    font-size:10px;
+
+    transform:rotate(-8deg);
+}
+
+
+/* FACE */
+
+.head{
+    position:absolute;
+
+    left:14px;
+    top:4px;
+
+    width:31px;
+    height:31px;
+
+    background:#ffd8c1;
+
+    border:2.5px solid #553044;
+
+    border-radius:50%;
+
+    z-index:5;
+}
+
+
+/* TWO SMALL CUTE EYES */
+
+.eye{
+    position:absolute;
+
+    top:10px;
+    left:7px;
+
+    width:6px;
+    height:8px;
+
+    background:#38232d;
+
+    border-radius:50%;
+
+    z-index:10;
+}
+
+.eye:before{
+    content:"";
+
+    position:absolute;
+
+    left:12px;
+    top:0;
+
+    width:6px;
+    height:8px;
+
+    background:#38232d;
+
+    border-radius:50%;
+}
+
+.eye:after{
+    content:"";
+
+    position:absolute;
+
+    left:1px;
+    top:1px;
+
+    width:2px;
+    height:2px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    box-shadow:12px 0 0 #fff;
+}
+
+
+/* NOSE */
+
+.nose{
+    position:absolute;
+
+    right:2px;
+    top:16px;
+
+    width:5px;
+    height:5px;
+
+    border-top:2px solid #a95c6d;
+    border-right:2px solid #a95c6d;
+
+    transform:rotate(45deg);
+}
+
+
+/* TINY CUTE MOUTH */
+
+.mouth{
+    position:absolute;
+
+    right:8px;
+    top:22px;
+
+    width:5px;
+    height:2px;
+
+    border-bottom:1.5px solid #a94e68;
+
+    border-radius:50%;
+}
+
+
+/* EAR */
+
+.ear{
+    position:absolute;
+
+    left:-3px;
+    top:14px;
+
+    width:7px;
+    height:9px;
+
+    background:#ffd8c1;
+
+    border:2px solid #553044;
+
+    border-radius:50%;
+}
+
+
+/* BACKPACK */
+
+.backpack{
+    position:absolute;
+
+    left:1px;
+    top:34px;
+
+    width:16px;
+    height:25px;
+
+    background:#e94391;
+
+    border:2px solid #5b3045;
+
+    border-radius:7px;
+
+    z-index:2;
+}
+
+.backpack:before{
+    content:"";
+
+    position:absolute;
+
+    left:4px;
+    top:-6px;
+
+    width:7px;
+    height:9px;
+
+    border:2px solid #5b3045;
+
+    border-bottom:0;
+
+    border-radius:8px 8px 0 0;
+}
+
+
+/* BODY */
+
+.body{
+    position:absolute;
+
+    left:13px;
+    top:32px;
+
+    width:27px;
+    height:25px;
+
+    background:#ff66ad;
+
+    border:2.5px solid #553044;
+
+    border-radius:9px 9px 7px 7px;
+
+    z-index:4;
+}
+
+.body:after{
+    content:"♥";
+
+    position:absolute;
+
+    left:8px;
+    top:5px;
+
+    color:#fff1f8;
+
+    font-size:8px;
+}
+
+
+/* SKIRT */
+
+.skirt{
+    position:absolute;
+
+    left:10px;
+    top:51px;
+
+    width:34px;
+    height:13px;
+
+    background:#ff9dcc;
+
+    border:2.5px solid #553044;
+
+    border-radius:5px 5px 10px 10px;
+
+    z-index:5;
+}
+
+
+/* ARMS */
+
+.arm{
+    position:absolute;
+
+    top:34px;
+
+    width:7px;
+    height:22px;
+
+    background:#ffd8c1;
+
+    border:2.5px solid #553044;
+
+    border-radius:8px;
+
+    transform-origin:top center;
+
+    z-index:3;
+}
+
+.arm.back{
+    left:9px;
+}
+
+.arm.front{
+    left:37px;
+}
+
+
+/* LEGS */
+
+.leg{
+    position:absolute;
+
+    top:61px;
+
+    width:8px;
+    height:20px;
+
+    background:#ffd8c1;
+
+    border:2.5px solid #553044;
+
+    border-radius:8px;
+
+    transform-origin:top center;
+
+    z-index:2;
+}
+
+.leg.back{
+    left:15px;
+}
+
+.leg.front{
+    left:29px;
+}
+
+
+/* SHOES */
+
+.shoe{
+    position:absolute;
+
+    left:0;
+    bottom:-4px;
+
+    width:16px;
+    height:8px;
+
+    background:#8b3f83;
+
+    border:2.5px solid #553044;
+
+    border-radius:10px;
+}
+
+
+/* RUNNING */
+
+#player.running .leg.back{
+    animation:legBack .18s infinite alternate;
+}
+
+#player.running .leg.front{
+    animation:legFront .18s infinite alternate;
+}
+
+#player.running .arm.back{
+    animation:armBack .18s infinite alternate;
+}
+
+#player.running .arm.front{
+    animation:armFront .18s infinite alternate;
+}
+
+@keyframes legBack{
+
+    from{
+        transform:rotate(28deg);
+    }
+
+    to{
+        transform:rotate(-28deg);
+    }
+}
+
+@keyframes legFront{
+
+    from{
+        transform:rotate(-28deg);
+    }
+
+    to{
+        transform:rotate(28deg);
+    }
+}
+
+@keyframes armBack{
+
+    from{
+        transform:rotate(-25deg);
+    }
+
+    to{
+        transform:rotate(25deg);
+    }
+}
+
+@keyframes armFront{
+
+    from{
+        transform:rotate(25deg);
+    }
+
+    to{
+        transform:rotate(-25deg);
+    }
+}
+
+
+/* JUMP */
+
+#player.jumping{
+    animation:jump .18s ease;
+}
+
+@keyframes jump{
+
+    50%{
+        transform:
+            scaleX(var(--flip))
+            scale(1.08,.94);
+    }
+}
+
+
+/* COINS */
+
+.coin{
+    position:absolute;
+
+    width:25px;
+    height:25px;
+
+    border-radius:50%;
+
+    background:#ffd83d;
+
+    border:4px solid #fff3a2;
+
+    box-shadow:0 0 12px #ffc400;
+
+    z-index:20;
+
+    animation:coinFloat .7s infinite alternate;
+}
+
+@keyframes coinFloat{
+
+    to{
+        transform:
+            translateY(-7px)
+            rotateY(180deg);
+    }
+}
+
+
+/* ENEMIES */
+
+.enemy{
+    position:absolute;
+
+    width:43px;
+    height:32px;
+
+    background:#bc55ad;
+
+    border:3px solid #593151;
+
+    border-radius:50% 50% 35% 35%;
+
+    z-index:25;
+}
+
+.enemy:before,
+.enemy:after{
+    content:"";
+
+    position:absolute;
+
+    top:6px;
+
+    width:8px;
+    height:9px;
+
+    background:white;
+
+    border:2px solid #593151;
+
+    border-radius:50%;
+}
+
+.enemy:before{
+    left:7px;
+}
+
+.enemy:after{
+    right:7px;
+}
+
+
+/* FLAG */
+
+.flag{
+    position:absolute;
+
+    width:7px;
+    height:100px;
+
+    background:#79536f;
+
+    border-radius:5px;
+
+    z-index:15;
+}
+
+.flag:after{
+    content:"🎀";
+
+    position:absolute;
+
+    left:5px;
+    top:-9px;
+
+    font-size:40px;
+}
+
+
+/* HUD */
+
+#hud{
+    position:fixed;
+
+    z-index:100;
+
+    top:12px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    padding:9px 16px;
+
+    background:#ffffffed;
+
+    border:3px solid #ff67ad;
+
+    border-radius:25px;
+
+    color:#87365c;
+
+    font-weight:bold;
+
+    box-shadow:0 5px 15px #8e315333;
+
+    white-space:nowrap;
+}
+
+
+/* SCREENS */
+
+.screen{
+    position:fixed;
+
+    inset:0;
+
+    z-index:200;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    background:#ffb8d999;
+
+    backdrop-filter:blur(6px);
+}
+
+.card{
+    width:min(90%,430px);
+
+    padding:30px;
+
+    text-align:center;
+
+    background:#fff;
+
+    border:5px solid #ff68ae;
+
+    border-radius:30px;
+
+    box-shadow:0 15px 40px #86325244;
+}
+
+.card h1{
+    color:#ec4d99;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#82415d;
+
+    line-height:1.5;
+
+    margin:9px;
+}
+
+button{
+    border:0;
+
+    background:linear-gradient(
+        #ff7dbc,
+        #ed4a99
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:17px;
+
+    padding:14px 27px;
+
+    border-radius:25px;
+
+    box-shadow:0 5px #b93475;
+
+    margin-top:15px;
+}
+
+button:active{
+    transform:translateY(4px);
+
+    box-shadow:0 1px #b93475;
+}
+
+.hidden{
+    display:none!important;
+}
+
+
+/* PHONE CONTROLS */
+
+#controls{
+    position:fixed;
+
+    bottom:16px;
+    left:0;
+
+    width:100%;
+
+    z-index:150;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    pointer-events:none;
+}
+
+.controlGroup{
+    display:flex;
+
+    gap:9px;
+}
+
+.control{
+    width:61px;
+    height:61px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:3px solid white;
+
+    background:#ed5b9fdd;
+
+    color:white;
+
+    font-size:27px;
+
+    font-weight:bold;
+
+    box-shadow:0 5px 10px #862b5533;
+
+    pointer-events:auto;
+
+    touch-action:none;
+}
+
+</style>
 </head>
+
 <body>
-    <!-- ==============================
-         HEADER
-    =============================== -->
-    <header class="header">
-        <h1>💗 QuizPinkX</h1>
-        <p>
-            Test your knowledge!
-        </p>
-    </header>
-    <!-- ==============================
-         HOME
-    =============================== -->
-    <main id="home">
-        <div class="home-card">
-            <h2>
-                Choose a Category
-            </h2>
-            <button
-                onclick="startQuiz('it')">
-                💻 IT & Technology
-            </button>
-            <button
-                onclick="startQuiz('general')">
-                🌎 General Knowledge
-            </button>
-            <button
-                onclick="startQuiz('science')">
-                🔬 Science
-            </button>
-            <button
-                onclick="startQuiz('english')">
-                📚 English
-            </button>
-        </div>
-    </main>
-    <!-- ==============================
-         QUIZ
-    =============================== -->
-    <main id="quiz"
-        class="hidden">
-        <div class="quiz-card">
-            <!-- TOP -->
-            <div class="quiz-top">
-                <button
-                    class="back-btn"
-                    onclick="backHome()">
-                    ← Back
-                </button>
-                <div class="question-number">
-                    Question
-                    <span id="questionNumber">
-                        1
-                    </span>
-                    /
-                    <span id="totalQuestions">
-                        10
-                    </span>
-                </div>
-            </div>
-            <!-- PROGRESS -->
-            <div class="progress-container">
-                <div
-                    id="progressBar"
-                    class="progress-bar">
-                </div>
-            </div>
-            <!-- SCORE -->
-            <div class="score">
-                Score:
-                <span id="score">
-                    0
-                </span>
-            </div>
-            <!-- QUESTION -->
-            <div class="question-box">
-                <h2 id="question">
-                    Question goes here
-                </h2>
-            </div>
-            <!-- ANSWERS -->
-            <div
-                id="answers"
-                class="answers">
-            </div>
-            <!-- NEXT -->
-            <button
-                id="nextButton"
-                class="next-btn"
-                onclick="nextQuestion()"
-                disabled>
-                NEXT →
-            </button>
-        </div>
-    </main>
-    <!-- ==============================
-         RESULT
-    =============================== -->
-    <main id="result"
-        class="hidden">
-        <div class="result-card">
-            <h2>
-                🎉 Quiz Complete!
-            </h2>
-            <div class="result-score">
-                <span id="finalScore">
-                    0
-                </span>
-                /
-                <span id="finalTotal">
-                    10
-                </span>
-            </div>
-            <p id="resultMessage">
-                Great job!
-            </p>
-            <button
-                onclick="restartQuiz()">
-                🔄 Play Again
-            </button>
-            <button
-                onclick="backHome()">
-                🏠 Back to Home
-            </button>
-        </div>
-    </main>
-    <!-- ==============================
-         WINNER POPUP
-    =============================== -->
-    <div
-        id="winnerPopup"
-        class="popup hidden">
-        <div class="popup-box">
-            <div class="boom">
-                💗
-            </div>
-            <h2 id="popupTitle">
-                🎉 CORRECT!
-            </h2>
-            <p id="popupMessage">
-                Nice job!
-            </p>
-            <button
-                onclick="closePopup()">
-                CONTINUE 💗
-            </button>
-        </div>
+
+
+<div id="game">
+
+    <div id="hud">
+
+        🎀 Level
+        <span id="level">1</span>
+
+        &nbsp;|&nbsp;
+
+        💎
+        <span id="score">0</span>
+
+        &nbsp;|&nbsp;
+
+        ❤️
+        <span id="lives">3</span>
+
     </div>
-    <!-- ==============================
-         JAVASCRIPT
-    =============================== -->
-    <script src="script.js"></script>
-</body>
-</html>
+
+
+    <div id="world">
+
+        <div
+            class="cloud"
+            style="left:150px;top:80px">
+        </div>
+
+        <div
+            class="cloud"
+            style="left:800px;top:120px">
+        </div>
+
+        <div
+            class="cloud"
+            style="left:1600px;top:70px">
+        </div>
+
+        <div
+            class="cloud"
+            style="left:2600px;top:110px">
+        </div>
+
+
+        <div id="objects"></div>
+
+
+        <!-- CHARACTER -->
+
+        <div id="player">
+
+            <div class="backpack"></div>
+
+
+            <div class="hair">
+
+                <div class="braid">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+
+            <div class="head">
+
+                <div class="eye"></div>
+
+                <div class="nose"></div>
+
+                <div class="mouth"></div>
+
+                <div class="ear"></div>
+
+            </div>
+
+
+            <div class="arm back"></div>
+
+            <div class="arm front"></div>
+
+
+            <div class="body"></div>
+
+            <div class="skirt"></div>
+
+
+            <div class="leg back">
+
+                <div class="shoe"></div>
+
+            </div>
+
+
+            <div class="leg front">
+
+                <div class="shoe"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- START SCREEN -->
+
+<div id="startScreen" class="screen">
+
+    <div class="card">
+
+        <h1>🎀 Pink Adventure</h1>
+
+        <p>
+            Help our little pink explorer
+            finish all <b>10 levels!</b> 🌸
+        </p>
+
+        <p>
+            💎 Collect gems<br>
+            👾 Avoid enemies<br>
+            🏁 Reach the flag
+        </p>
+
+        <p>
+            <b>← →</b> Move<br>
+            <b>SPACE / ↑</b> Jump
+        </p>
+
+        <button onclick="startGame()">
+            START ADVENTURE 🎀
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- LEVEL SCREEN -->
+
+<div id="levelScreen"
+class="screen hidden">
+
+    <div class="card">
+
+        <h1 id="levelTitle">
+            Level 1
+        </h1>
+
+        <p id="levelMessage">
+            Ready for an adventure? 🌸
+        </p>
+
+        <button onclick="continueLevel()">
+            LET'S GO! 🎀
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- END SCREEN -->
+
+<div id="endScreen"
+class="screen hidden">
+
+    <div class="card">
+
+        <h1 id="endTitle">
+            Game Over 💔
+        </h1>
+
+        <p id="endMessage"></p>
+
+        <button onclick="restartGame()">
+            PLAY AGAIN 🎀
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CONTROLS -->
+
+<div id="controls">
+
+    <div class="controlGroup">
+
+        <div
+            class="control"
+            id="leftButton">
+            ←
+        </div>
+
+        <div
+            class="control"
+            id="rightButton">
+            →
+        </div>
+
+    </div>
+
+
+    <div class="controlGroup">
+
+        <div
+            class="control"
+            id="jumpButton">
+            ↑
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* VARIABLES */
+
+const player =
+document.getElementById("player");
+
+const world =
+document.getElementById("world");
+
+const objects =
+document.getElementById("objects");
+
+let currentLevel=1;
+
+let score=0;
+
+let lives=3;
+
+let playerX=100;
+
+let playerY=400;
+
+let velocityX=0;
+
+let velocityY=0;
+
+let onGround=false;
+
+let playing=false;
+
+let levelComplete=false;
+
+let cameraX=0;
+
+let platforms=[];
+
+let coins=[];
+
+let enemies=[];
+
+let finishX=0;
+
+const keys={
+    left:false,
+    right:false
+};
+
+const gravity=.72;
+
+const speed=5;
+
+const jumpPower=-14;
+
+
+/* LEVEL DATA */
+
+const levels=[
+
+[
+[0,500,700],
+[800,440,350],
+[1250,500,700],
+[2050,430,600]
+],
+
+[
+[0,500,500],
+[600,420,300],
+[980,340,300],
+[1400,450,400],
+[1950,380,750]
+],
+
+[
+[0,500,450],
+[530,420,280],
+[900,500,350],
+[1350,400,300],
+[1750,330,350],
+[2200,450,700]
+],
+
+[
+[0,500,600],
+[720,400,260],
+[1080,320,280],
+[1450,420,300],
+[1880,340,300],
+[2300,450,700]
+],
+
+[
+[0,500,450],
+[550,380,260],
+[930,460,250],
+[1280,350,280],
+[1650,280,300],
+[2050,400,800]
+],
+
+[
+[0,500,350],
+[450,420,250],
+[780,340,250],
+[1120,450,250],
+[1460,360,250],
+[1800,280,300],
+[2250,430,700]
+],
+
+[
+[0,500,300],
+[400,400,250],
+[730,300,250],
+[1080,390,250],
+[1430,280,250],
+[1780,380,250],
+[2130,300,250],
+[2500,450,700]
+],
+
+[
+[0,500,500],
+[600,410,200],
+[850,300,200],
+[1100,400,200],
+[1400,300,220],
+[1700,420,200],
+[2000,320,220],
+[2350,450,750]
+],
+
+[
+[0,500,350],
+[450,400,220],
+[800,300,220],
+[1150,400,220],
+[1500,300,220],
+[1850,400,220],
+[2200,300,220],
+[2550,450,750]
+],
+
+[
+[0,500,350],
+[430,390,220],
+[760,280,220],
+[1100,390,220],
+[1440,270,220],
+[1780,380,220],
+[2120,270,220],
+[2460,370,220],
+[2800,450,900]
+]
+
+];
+
+
+/* START */
+
+async function startGame(){
+
+    try{
+
+        if(document.documentElement.requestFullscreen){
+
+            await document
+            .documentElement
+            .requestFullscreen();
+
+        }
+
+    }catch(e){}
+
+
+    try{
+
+        if(
+            screen.orientation &&
+            screen.orientation.lock
+        ){
+
+            await screen.orientation
+            .lock("landscape");
+
+        }
+
+    }catch(e){}
+
+
+    document
+    .getElementById("startScreen")
+    .classList
+    .add("hidden");
+
+    currentLevel=1;
+
+    score=0;
+
+    lives=3;
+
+    updateHUD();
+
+    showLevelScreen();
+}
+
+
+/* LEVEL SCREEN */
+
+function showLevelScreen(){
+
+    playing=false;
+
+    document
+    .getElementById("levelTitle")
+    .textContent=
+    "Level "+currentLevel;
+
+    document
+    .getElementById("levelMessage")
+    .textContent=
+    currentLevel===10
+    ?
+    "FINAL LEVEL! 👑🎀"
+    :
+    "Ready for Level "+
+    currentLevel+
+    "? 🌸";
+
+    document
+    .getElementById("levelScreen")
+    .classList
+    .remove("hidden");
+}
+
+
+function continueLevel(){
+
+    document
+    .getElementById("levelScreen")
+    .classList
+    .add("hidden");
+
+    createLevel();
+
+    playing=true;
+}
+
+
+/* CREATE LEVEL */
+
+function createLevel(){
+
+    objects.innerHTML="";
+
+    platforms=[];
+
+    coins=[];
+
+    enemies=[];
+
+    playerX=100;
+
+    playerY=400;
+
+    velocityX=0;
+
+    velocityY=0;
+
+    cameraX=0;
+
+    levelComplete=false;
+
+    const data=
+    levels[currentLevel-1];
+
+
+    data.forEach(p=>{
+
+        const element=
+        document.createElement("div");
+
+        element.className="platform";
+
+        element.style.left=
+        p[0]+"px";
+
+        element.style.top=
+        p[1]+"px";
+
+        element.style.width=
+        p[2]+"px";
+
+        objects.appendChild(element);
+
+        platforms.push({
+            x:p[0],
+            y:p[1],
+            w:p[2],
+            h:34
+        });
+
+    });
+
+
+    data.forEach((p,index)=>{
+
+        if(index===data.length-1)
+            return;
+
+        const coinX=
+        p[0]+p[2]/2-12;
+
+        const coinY=
+        p[1]-45;
+
+        const element=
+        document.createElement("div");
+
+        element.className="coin";
+
+        element.style.left=
+        coinX+"px";
+
+        element.style.top=
+        coinY+"px";
+
+        objects.appendChild(element);
+
+        coins.push({
+            x:coinX,
+            y:coinY,
+            w:25,
+            h:25,
+            element,
+            collected:false
+        });
+
+    });
+
+
+    for(
+        let i=1;
+        i<=Math.min(5,currentLevel+1);
+        i++
+    ){
+
+        const p=
+        data[
+            Math.min(
+                i,
+                data.length-1
+            )
+        ];
+
+        const enemyX=
+        p[0]+p[2]/2;
+
+        const enemyY=
+        p[1]-32;
+
+        const element=
+        document.createElement("div");
+
+        element.className="enemy";
+
+        objects.appendChild(element);
+
+        enemies.push({
+
+            x:enemyX,
+            y:enemyY,
+            w:43,
+            h:32,
+
+            min:p[0]+15,
+            max:p[0]+p[2]-60,
+
+            direction:
+            i%2?1:-1,
+
+            element
+
+        });
+
+    }
+
+
+    const last=
+    data[data.length-1];
+
+    finishX=
+    last[0]+last[2]-85;
+
+    const flag=
+    document.createElement("div");
+
+    flag.className="flag";
+
+    flag.style.left=
+    finishX+"px";
+
+    flag.style.top=
+    last[1]-100+"px";
+
+    objects.appendChild(flag);
+
+
+    player.classList.remove("left");
+
+    player.classList.remove("running");
+
+    player.classList.remove("jumping");
+
+    player.style.left=
+    playerX+"px";
+
+    player.style.top=
+    playerY+"px";
+
+    updateCamera();
+}
+
+
+/* COLLISION */
+
+function collision(a,b){
+
+    return(
+        a.x<b.x+b.w &&
+        a.x+a.w>b.x &&
+        a.y<b.y+b.h &&
+        a.y+a.h>b.y
+    );
+
+}
+
+
+/* UPDATE */
+
+function update(){
+
+    if(!playing)
+        return;
+
+
+    if(keys.right){
+
+        velocityX+=.7;
+
+        player.classList
+        .remove("left");
+
+    }
+
+
+    if(keys.left){
+
+        velocityX-=.7;
+
+        player.classList
+        .add("left");
+
+    }
+
+
+    if(
+        !keys.left &&
+        !keys.right
+    ){
+
+        velocityX*=.78;
+
+    }
+
+
+    velocityX=
+    Math.max(
+        -speed,
+        Math.min(speed,velocityX)
+    );
+
+
+    if(Math.abs(velocityX)>.35){
+
+        player.classList
+        .add("running");
+
+    }else{
+
+        player.classList
+        .remove("running");
+
+    }
+
+
+    velocityY+=gravity;
+
+    playerX+=velocityX;
+
+    playerY+=velocityY;
+
+
+    const playerBox={
+
+        x:playerX,
+        y:playerY,
+        w:48,
+        h:82
+
+    };
+
+
+    onGround=false;
+
+
+    platforms.forEach(platform=>{
+
+        if(
+            collision(
+                playerBox,
+                platform
+            )
+        ){
+
+            const oldBottom=
+            playerY+82-velocityY;
+
+            if(
+                velocityY>=0 &&
+                oldBottom<=platform.y+10
+            ){
+
+                playerY=
+                platform.y-82;
+
+                velocityY=0;
+
+                onGround=true;
+
+            }
+
+        }
+
+    });
+
+
+    if(playerY>700){
+
+        loseLife();
+
+        return;
+
+    }
+
+
+    coins.forEach(coin=>{
+
+        if(coin.collected)
+            return;
+
+        if(
+            collision(
+                playerBox,
+                coin
+            )
+        ){
+
+            coin.collected=true;
+
+            coin.element.remove();
+
+            score+=10;
+
+            updateHUD();
+
+        }
+
+    });
+
+
+    enemies.forEach(enemy=>{
+
+        enemy.x+=
+        enemy.direction*
+        (1+currentLevel*.08);
+
+        if(
+            enemy.x<=enemy.min ||
+            enemy.x>=enemy.max
+        ){
+
+            enemy.direction*=-1;
+
+        }
+
+        enemy.element.style.left=
+        enemy.x+"px";
+
+        enemy.element.style.top=
+        enemy.y+"px";
+
+
+        const enemyBox={
+
+            x:enemy.x,
+            y:enemy.y,
+            w:enemy.w,
+            h:enemy.h
+
+        };
+
+
+        if(
+            collision(
+                playerBox,
+                enemyBox
+            )
+        ){
+
+            loseLife();
+
+        }
+
+    });
+
+
+    if(playerX>=finishX){
+
+        finishLevel();
+
+    }
+
+
+    player.style.left=
+    playerX+"px";
+
+    player.style.top=
+    playerY+"px";
+
+    updateCamera();
+
+}
+
+
+/* CAMERA */
+
+function updateCamera(){
+
+    const screenWidth=
+    window.innerWidth;
+
+    cameraX=
+    playerX-
+    screenWidth*.35;
+
+    if(cameraX<0)
+        cameraX=0;
+
+
+    const level=
+    levels[currentLevel-1];
+
+    const last=
+    level[level.length-1];
+
+    const worldWidth=
+    last[0]+last[2];
+
+    const maxCamera=
+    Math.max(
+        0,
+        worldWidth-screenWidth
+    );
+
+    if(cameraX>maxCamera)
+        cameraX=maxCamera;
+
+
+    world.style.transform=
+    "translateX("+
+    (-cameraX)+
+    "px)";
+
+}
+
+
+/* JUMP */
+
+function jump(){
+
+    if(!playing)
+        return;
+
+    if(onGround){
+
+        velocityY=
+        jumpPower;
+
+        onGround=false;
+
+        player.classList
+        .add("jumping");
+
+        setTimeout(()=>{
+
+            player.classList
+            .remove("jumping");
+
+        },180);
+
+    }
+
+}
+
+
+/* LIFE */
+
+function loseLife(){
+
+    if(!playing)
+        return;
+
+    playing=false;
+
+    lives--;
+
+    updateHUD();
+
+
+    if(lives<=0){
+
+        document
+        .getElementById("endTitle")
+        .textContent=
+        "Game Over 💔";
+
+        document
+        .getElementById("endMessage")
+        .textContent=
+        "Score: "+
+        score+
+        " • Level "+
+        currentLevel;
+
+        document
+        .getElementById("endScreen")
+        .classList
+        .remove("hidden");
+
+        return;
+
+    }
+
+
+    setTimeout(()=>{
+
+        playerX=100;
+
+        playerY=400;
+
+        velocityX=0;
+
+        velocityY=0;
+
+        player.classList
+        .remove("left");
+
+        playing=true;
+
+    },600);
+
+}
+
+
+/* FINISH LEVEL */
+
+function finishLevel(){
+
+    if(levelComplete)
+        return;
+
+    levelComplete=true;
+
+    playing=false;
+
+    score+=50;
+
+    updateHUD();
+
+
+    if(currentLevel===10){
+
+        document
+        .getElementById("endTitle")
+        .textContent=
+        "YOU DID IT! 👑🎀";
+
+        document
+        .getElementById("endMessage")
+        .textContent=
+        "You finished all 10 levels! 💎 "+
+        "Final Score: "+
+        score;
+
+        document
+        .getElementById("endScreen")
+        .classList
+        .remove("hidden");
+
+    }else{
+
+        currentLevel++;
+
+        setTimeout(
+            showLevelScreen,
+            400
+        );
+
+    }
+
+}
+
+
+/* HUD */
+
+function updateHUD(){
+
+    document
+    .getElementById("level")
+    .textContent=
+    currentLevel;
+
+    document
+    .getElementById("score")
+    .textContent=
+    score;
+
+    document
+    .getElementById("lives")
+    .textContent=
+    lives;
+
+}
+
+
+/* RESTART */
+
+function restartGame(){
+
+    document
+    .getElementById("endScreen")
+    .classList
+    .add("hidden");
+
+    currentLevel=1;
+
+    score=0;
+
+    lives=3;
+
+    updateHUD();
+
+    showLevelScreen();
+
+}
+
+
+/* KEYBOARD */
+
+document.addEventListener(
+"keydown",
+event=>{
+
+    if(
+        event.key==="ArrowLeft" ||
+        event.key.toLowerCase()==="a"
+    ){
+
+        keys.left=true;
+
+    }
+
+
+    if(
+        event.key==="ArrowRight" ||
+        event.key.toLowerCase()==="d"
+    ){
+
+        keys.right=true;
+
+    }
+
+
+    if(
+        event.key===" " ||
+        event.key==="ArrowUp" ||
+        event.key.toLowerCase()==="w"
+    ){
+
+        event.preventDefault();
+
+        jump();
+
+    }
+
+});
+
+
+document.addEventListener(
+"keyup",
+event=>{
+
+    if(
+        event.key==="ArrowLeft" ||
+        event.key.toLowerCase()==="a"
+    ){
+
+        keys.left=false;
+
+    }
+
+
+    if(
+        event.key==="ArrowRight" ||
+        event.key.toLowerCase()==="d"
+    ){
+
+        keys.right=false;
+
+    }
+
+});
+
+
+/* TOUCH + MOUSE */
+
+function holdButton(
+button,
+press,
+release
+){
+
+    button.addEventListener(
+    "touchstart",
+    e=>{
+
+        e.preventDefault();
+
+        press();
+
+    },
+    {passive:false}
+    );
+
+
+    button.addEventListener(
+    "touchend",
+    e=>{
+
+        e.preventDefault();
+
+        release();
+
+    },
+    {passive:false}
+    );
+
+
+    button.addEventListener(
+    "mousedown",
+    e=>{
+
+        e.preventDefault();
+
+        press();
+
+    });
+
+
+    button.addEventListener(
+    "mouseup",
+    release
+    );
+
+
+    button.addEventListener(
+    "mouseleave",
+    release
+    );
+
+}
+
+
+holdButton(
+
+    document.getElementById(
+        "leftButton"
+    ),
+
+    ()=>{
+        keys.left=true;
+    },
+
+    ()=>{
+        keys.left=false;
+    }
+
+);
+
+
+holdButton(
+
+    document.getElementById(
+        "rightButton"
+    ),
+
+    ()=>{
+        keys.right=true;
+    },
+
+    ()=>{
+        keys.right=false;
+    }
+
+);
+
+
+/* JUMP BUTTON */
+
+document
+.getElementById("jumpButton")
+.addEventListener(
+"touchstart",
+e=>{
+
+    e.preventDefault();
+
+    jump();
+
+},
+{passive:false}
+);
+
+
+document
+.getElementById("jumpButton")
+.addEventListener(
+"mousedown",
+jump
+);
+
+
+/* GAME LOOP */
+
+function gameLoop(){
+
+    update();
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+
+}
+updateHUD();
+
+gameLoop();
+
+</script>
+
+<!-- GAME MENU BUTTON -->
+<div id="gameMenu">
+    <button onclick="togglePause()">⏸</button>
+</div>
+
+<!-- PAUSE MENU -->
+<div id="pauseMenu" class="menuScreen hidden">
+    <div class="menuBox">
+        <h1>🎀 PAUSED</h1>
+
+        <button onclick="resumeGame()">▶ RESUME</button>
+        <button onclick="goMainMenu()">🏠 MAIN MENU</button>
+        <button onclick="exitGame()">🚪 EXIT GAME</button>
+    </div>
+</div>
+
+<!-- MAIN MENU -->
+<div id="mainMenu" class="menuScreen hidden">
+    <div class="menuBox">
+        <h1>🎀 Pink Adventure</h1>
+
+        <button onclick="startFromMenu()">▶ PLAY</button>
+        <button onclick="exitGame()">🚪 EXIT GAME</button>
+    </div>
+</div>
+
+<!-- PAUSE BUTTON -->
+<button id="pauseBtn">⏸</button>
+
+<!-- PAUSE MENU -->
+<div id="pauseMenu" class="menuScreen hidden">
+
+    <div class="menuBox">
+
+        <h1>🎀 PAUSED</h1>
+
+        <button id="resumeBtn">
+            ▶ RESUME
+        </button>
+
+        <button id="menuBtn">
+            🏠 MAIN MENU
+        </button>
+
+        <button id="exitBtn">
+            🚪 EXIT GAME
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN MENU -->
+<div id="mainMenu" class="menuScreen hidden">
+
+    <div class="menuBox">
+
+        <h1>🎀 Pink Adventure</h1>
+
+        <button id="playBtn">
+            ▶ PLAY
+        </button>
+
+        <button id="mainExitBtn">
+            🚪 EXIT GAME
+        </button>
+
+    </div>
+</div>
+
+<button id="pauseBtn">⏸</button>
+
+<div id="pauseMenu" class="menuScreen hidden">
+
+    <div class="menuBox">
+        <h1>🎀 PAUSED</h1>
+
+        <button id="resumeBtn">▶ RESUME</button>
+        <button id="menuBtn">🏠 MAIN MENU</button>
+        <button id="exitBtn">🚪 EXIT GAME</button>
+    </div>
+
+</div>
+
+<div id="mainMenu" class="menuScreen hidden">
+
+    <div class="menuBox">
+        <h1>🎀 Pink Adventure</h1>
+
+        <button id="playBtn">▶ PLAY</button>
+        <button id="mainExitBtn">🚪 EXIT GAME</button>
+    </div>
+
+</div>
+
+<script>
+
+const worldWidth = document.getElementById("world");
